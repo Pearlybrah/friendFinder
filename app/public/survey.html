@@ -19,7 +19,138 @@
     </div>
 
     <div>
-        <ol class="questionDump"></ol>
+        <h2>Survey Questions</h2>
+        <hr>
+
+        <h3><strong>About You</strong></h3>
+        <h4>Name (Required)</h4>
+        <input type="text" id="name" class="form-control" required>
+
+        <h4>Link to Photo Image (Required)</h4>
+        <input type="text" id="photo" class="form-control" required>
+
+        <hr>
+
+        <h3><strong>Question 1</strong></h3>
+        <h4>You like science more than art.</h4>
+        <select class="chosen-select" id="q1">
+            <option value=""></option>
+            <option value="1">1 (Strongly Disagree)</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5 (Strongly Agree)</option>
+        </select>
+
+        <h3><strong>Question 2</strong></h3>
+        <h4>You enjoy working out</h4>
+        <select class="chosen-select" id="q2">
+            <option value=""></option>
+            <option value="1">1 (Strongly Disagree)</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5 (Strongly Agree)</option>
+        </select>
+
+
+        <h3><strong>Question 3</strong></h3>
+        <h4>You love football.</h4>
+        <select class="chosen-select" id="q3">
+            <option value=""></option>
+            <option value="1">1 (Strongly Disagree)</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5 (Strongly Agree)</option>
+        </select>
+
+
+        <h3><strong>Question 4</strong></h3>
+        <h4>You enjoy to learn new things.</h4>
+        <select class="chosen-select" id="q4">
+            <option value=""></option>
+            <option value="1">1 (Strongly Disagree)</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5 (Strongly Agree)</option>
+        </select>
+
+
+        <h3><strong>Question 5</strong></h3>
+        <h4>You are very outspoken.</h4>
+        <select class="chosen-select" id="q5">
+            <option value=""></option>
+            <option value="1">1 (Strongly Disagree)</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5 (Strongly Agree)</option>
+        </select>
+
+
+        <h3><strong>Question 6</strong></h3>
+        <h4>You stand up for what you believe in.</h4>
+        <select class="chosen-select" id="q6">
+            <option value=""></option>
+            <option value="1">1 (Strongly Disagree)</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5 (Strongly Agree)</option>
+        </select>
+
+
+        <h3><strong>Question 7</strong></h3>
+        <h4>You like to dance.</h4>
+        <select class="chosen-select" id="q7">
+            <option value=""></option>
+            <option value="1">1 (Strongly Disagree)</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5 (Strongly Agree)</option>
+        </select>
+
+        <h3><strong>Question 8</strong></h3>
+        <h4>You are a dog person.</h4>
+        <select class="chosen-select" id="q8">
+            <option value=""></option>
+            <option value="1">1 (Strongly Disagree)</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5 (Strongly Agree)</option>
+        </select>
+
+        <h3><strong>Question 9</strong></h3>
+        <h4>You are a cat person</h4>
+        <select class="chosen-select" id="q9">
+            <option value=""></option>
+            <option value="1">1 (Strongly Disagree)</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5 (Strongly Agree)</option>
+        </select>
+
+        <h3><strong>Question 10</strong></h3>
+        <h4>You like the coding bootcamp.</h4>
+        <select class="chosen-select" id="q10">
+            <option value=""></option>
+            <option value="1">1 (Strongly Disagree)</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5 (Strongly Agree)</option>
+        </select>
+
+        <br>
+        <br>
+
+        <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit"><i class="fa fa-check-circle"
+            aria-hidden="true"></i>Submit</button>
     </div>
 
     <footer class="footer">
@@ -31,33 +162,73 @@
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script type="text/javascript">
-
-
-    $("#surveyStart").on("click", function(event) { 
-        event.preventDefault();
-
-        function getQuestions() {
-            $.ajax({ url: "/api/friends", method: "GET"})
-              .then(function(questionData) {
-                console.log(questionData);
-
-                for (let i = 0; i > questionData.length; i ++) {
-                    var questionTable = $(".questionDump");
-
-                    var questionList = $("<li>");
-                    
-                    questionList.append(
-                        $("<h2>").text("Question #" + (i +1)),
-                        $("<h3>").text(questionData[i])
-                    );
-
-                    questionTable.append(questionList);
-                };
-            });
+        
+        var config = {
+          ".chosen-select": {},
+          ".chosen-select-deselect": {
+            allow_single_deselect: true
+          },
+          ".chosen-select-no-single": {
+            disable_search_threshold: 10
+          },
+          ".chosen-select-no-results": {
+            no_results_text: "Oops, nothing found!"
+          },
+          ".chosen-select-width": {
+            width: "95%"
+          }
         };
-        getQuestions();
 
-    });
-    </script>
+        $("#submit").on("click", function(event) {
+          event.preventDefault();
+    
+          function validateForm() {
+            var isValid = true;
+            $(".form-control").each(function() {
+              if ($(this).val() === "") {
+                isValid = false;
+              }
+            });
+    
+            $(".chosen-select").each(function() {
+    
+              if ($(this).val() === "") {
+                isValid = false;
+              }
+            });
+            return isValid;
+          }
+    
+          if (validateForm()) {
+            var userData = {
+              name: $("#name").val(),
+              photo: $("#photo").val(),
+              scores: [
+                $("#q1").val(),
+                $("#q2").val(),
+                $("#q3").val(),
+                $("#q4").val(),
+                $("#q5").val(),
+                $("#q6").val(),
+                $("#q7").val(),
+                $("#q8").val(),
+                $("#q9").val(),
+                $("#q10").val()
+              ]
+            };
+    
+            $.post("/api/friends", userData, function(data) {
+    
+              $("#match-name").text(data.name);
+              $("#match-img").attr("src", data.photo);
+    
+              $("#results-modal").modal("toggle");
+    
+            });
+          } else {
+            alert("Please fill out all fields before submitting!");
+          }
+        });
+      </script>
 </body>
 </html>

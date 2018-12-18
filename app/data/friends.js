@@ -2,10 +2,20 @@
 
 var friendArray = [
     {
-      userName: "Ahmed",
-      userEmail: "ahmed@example.com",
-      userID: "afhaque89",
-      userPhone: "000-000-0000"
+      name: "Ahmed",
+      photo: "https://cdn.shopify.com/s/files/1/1452/7530/products/slimer.jpg?v=1505206859",
+      scores: [
+        5,
+        3,
+        1,
+        3,
+        3,
+        5,
+        5,
+        5,
+        1,
+        3
+      ]
     }
 ];
   
