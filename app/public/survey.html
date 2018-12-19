@@ -33,7 +33,7 @@
 
         <h3><strong>Question 1</strong></h3>
         <h4>You like science more than art.</h4>
-        <select class="chosen-select" id="q1">
+        <select class="chosen" id="q1">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -44,7 +44,7 @@
 
         <h3><strong>Question 2</strong></h3>
         <h4>You enjoy working out</h4>
-        <select class="chosen-select" id="q2">
+        <select class="chosen" id="q2">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -56,7 +56,7 @@
 
         <h3><strong>Question 3</strong></h3>
         <h4>You love football.</h4>
-        <select class="chosen-select" id="q3">
+        <select class="chosen" id="q3">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -68,7 +68,7 @@
 
         <h3><strong>Question 4</strong></h3>
         <h4>You enjoy to learn new things.</h4>
-        <select class="chosen-select" id="q4">
+        <select class="chosen" id="q4">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -80,7 +80,7 @@
 
         <h3><strong>Question 5</strong></h3>
         <h4>You are very outspoken.</h4>
-        <select class="chosen-select" id="q5">
+        <select class="chosen" id="q5">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -92,7 +92,7 @@
 
         <h3><strong>Question 6</strong></h3>
         <h4>You stand up for what you believe in.</h4>
-        <select class="chosen-select" id="q6">
+        <select class="chosen" id="q6">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -104,7 +104,7 @@
 
         <h3><strong>Question 7</strong></h3>
         <h4>You like to dance.</h4>
-        <select class="chosen-select" id="q7">
+        <select class="chosen" id="q7">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -115,7 +115,7 @@
 
         <h3><strong>Question 8</strong></h3>
         <h4>You are a dog person.</h4>
-        <select class="chosen-select" id="q8">
+        <select class="chosen" id="q8">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -126,7 +126,7 @@
 
         <h3><strong>Question 9</strong></h3>
         <h4>You are a cat person</h4>
-        <select class="chosen-select" id="q9">
+        <select class="chosen" id="q9">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -137,7 +137,7 @@
 
         <h3><strong>Question 10</strong></h3>
         <h4>You like the coding bootcamp.</h4>
-        <select class="chosen-select" id="q10">
+        <select class="chosen" id="q10">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -153,6 +153,25 @@
             aria-hidden="true"></i>Submit</button>
     </div>
 
+    <div id="results-modal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h2 class="modal-title"><strong>Best Friend Match</strong></h2>
+              </div>
+              <div class="modal-body">
+                  <h2 id="match-name"></h2>
+                  <img id="match-img" src="" alt="">
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+          </div>
+
+      </div>
+  </div>
+
     <footer class="footer">
         <div class="container">
           <p><a href="/api/friends">API Friend's Link</a>
@@ -164,25 +183,25 @@
     <script type="text/javascript">
         
         var config = {
-          ".chosen-select": {},
-          ".chosen-select-deselect": {
+          ".chosen": {},
+          ".chosen-deselect": {
             allow_single_deselect: true
           },
-          ".chosen-select-no-single": {
+          ".chosen-no-single": {
             disable_search_threshold: 10
           },
-          ".chosen-select-no-results": {
-            no_results_text: "Oops, nothing found!"
+          ".chosen-no-results": {
+            no_results_text: "Invalid"
           },
-          ".chosen-select-width": {
-            width: "95%"
+          ".chosen-width": {
+            width: "80%"
           }
         };
 
         $("#submit").on("click", function(event) {
           event.preventDefault();
     
-          function validateForm() {
+          function validateSurvey() {
             var isValid = true;
             $(".form-control").each(function() {
               if ($(this).val() === "") {
@@ -190,7 +209,7 @@
               }
             });
     
-            $(".chosen-select").each(function() {
+            $(".chosen").each(function() {
     
               if ($(this).val() === "") {
                 isValid = false;
@@ -199,7 +218,7 @@
             return isValid;
           }
     
-          if (validateForm()) {
+          if (validateSurvey()) {
             var userData = {
               name: $("#name").val(),
               photo: $("#photo").val(),
